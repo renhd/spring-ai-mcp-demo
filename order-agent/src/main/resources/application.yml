@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: order-agent
+  ai:
+    dashscope:
+      api-key: ${DASHSCOPE_API_KEY}
+      chat:
+        options:
+          model: qwen-plus-latest
+    mcp:
+      client:
+#        stdio:
+#          servers-configuration: classpath:mcp-servers.json
+        sse:
+          connections:
+            ali:
+              url: https://mcp.api-inference.modelscope.net
+              sse-endpoint: /ad9ebf79648a45/sse
+            order:
+              url: http://localhost:8081
+        toolcallback:
+          enabled: false
+logging:
+  level:
+    '[io.modelcontextprotocol.client]': debug
+    '[io.modelcontextprotocol.spec]': debug

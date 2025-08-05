@@ -1,0 +1,21 @@
+spring:
+  ai:
+    mcp:
+      server:
+        name: mcp-server-order
+        version: 0.0.1
+        
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/demodb?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: xgourd
+    password: xgourd123
+#sse方式需要启动web
+server:
+  port: 8081
+# stdio方式需要加一下配置项禁用web     
+#  main:
+#    banner-mode: off
+#    web-application-type: none
+#logging:
+#  pattern:
+#    console: ''

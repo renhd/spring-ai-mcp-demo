@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: multi-modality
+  ai:
+    dashscope:
+      api-key: ${DASHSCOPE_API_KEY}
+      chat:
+        options:
+          multi-model: true
+          model: qwen-vl-max
+      audio:
+        synthesis:
+          options:
+            model: sambert-zhiming-v1

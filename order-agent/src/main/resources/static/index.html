@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <title>套餐购买</title>
+  <style>
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 420px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      padding: 24px 16px 16px 16px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 18px;
+      color: #333;
+    }
+    .plans {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .plan {
+      display: flex;
+      align-items: center;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 12px;
+      background: #fafbfc;
+      transition: border 0.2s;
+    }
+    .plan input[type="radio"] {
+      margin-right: 12px;
+      accent-color: #007aff;
+    }
+    .plan.selected {
+      border: 1.5px solid #007aff;
+      background: #f0f7ff;
+    }
+    .plan-title {
+      font-weight: bold;
+      font-size: 16px;
+      color: #222;
+    }
+    .plan-desc {
+      font-size: 13px;
+      color: #888;
+      margin-left: 8px;
+    }
+    .plan-price {
+      margin-left: auto;
+      color: #007aff;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .form-group {
+      margin-bottom: 14px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #555;
+      font-size: 15px;
+    }
+    input[type="text"], input[type="tel"] {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+    .submit-btn {
+      width: 100%;
+      background: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 0;
+      font-size: 17px;
+      font-weight: bold;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .submit-btn:active {
+      background: #005bb5;
+    }
+    @media (max-width: 480px) {
+      .container {
+        margin: 0;
+        border-radius: 0;
+        min-height: 100vh;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>套餐购买</h2>
+    <form id="buyForm" action="/buy" method="post">
+      <div class="plans" id="plans">
+        <div class="plan selected">
+          <input type="radio" name="plan" value="1" id="plan-basic" checked>
+          <span class="plan-title">套餐1:基础套餐</span>
+          <span class="plan-desc">适合个人体验</span>
+          <span class="plan-price">￥9.9</span>
+        </div>
+        <div class="plan">
+          <input type="radio" name="plan" value="2" id="plan-pro">
+          <span class="plan-title">套餐2:专业套餐</span>
+          <span class="plan-desc">适合小团队</span>
+          <span class="plan-price">￥29.9</span>
+        </div>
+        <div class="plan">
+          <input type="radio" name="plan" value="3" id="plan-vip">
+          <span class="plan-title">套餐3:尊享套餐</span>
+          <span class="plan-desc">企业专属</span>
+          <span class="plan-price">￥99.9</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone">手机号</label>
+        <input type="tel" id="phone" name="phone" placeholder="请输入手机号" pattern="^1\d{10}$" required>
+      </div>
+      <button type="submit" class="submit-btn">立即购买</button>
+    </form>
+  </div>
+  <script>
+    // 选中套餐高亮
+    document.querySelectorAll('.plan input[type="radio"]').forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        document.querySelectorAll('.plan').forEach(function(plan) {
+          plan.classList.remove('selected');
+        });
+        this.parentElement.classList.add('selected');
+      });
+    });
+
+    // 简单表单校验和提交
+    document.getElementById('buyForm').addEventListener('submit', function(e) {
+      
+      var plan = document.querySelector('input[name="plan"]:checked').value;
+      var phone = document.getElementById('phone').value.trim();
+      if (!/^1\d{10}$/.test(phone)) {
+        alert('请输入正确的手机号');
+        e.preventDefault();
+      }
+      if(!plan) {
+         alert('请选择一个套餐');
+         e.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>

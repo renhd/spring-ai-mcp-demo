@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: bi
+  ai:
+    openai:
+      api-key: ${DASHSCOPE_API_KEY}
+      base-url: https://dashscope.aliyuncs.com/compatible-mode
+#      base-url: https://localhost:11434
+      chat:
+        options:
+          model: qwen-plus
+#          model: qwen3:0.6
+    mcp:
+      client:
+        sse:
+          connections:
+            chart:
+              url: http://localhost:1122/sse
+            data:
+              url: http://localhost:8081/sse
+        toolcallback:
+          enabled: false
+logging:
+  level:
+    '[io.modelcontextprotocol.client]': debug
+    '[io.modelcontextprotocol.spec]': debug
